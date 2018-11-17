@@ -3,7 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const {sequelize} = require('./models');
+const {
+    sequelize
+} = require('./models');
 const config = require('./config/config');
 
 const app = express();
@@ -25,7 +27,4 @@ function listening() {
     console.log(`listening on port ${config.port}...`)
 }
 
-app.use(express.static( path.join(__dirname, '../client/public')));
-
-
-
+app.use(express.static(path.join(__dirname, '../client/public')));

@@ -1,0 +1,50 @@
+module.exports = (sequelize, DataTypes) => {
+  const Client = sequelize.define('Client', {
+    personnel_nom: DataTypes.STRING,
+    personnel_prenom: DataTypes.STRING,
+    personnel_telephone: DataTypes.STRING,
+    personnel_email: DataTypes.STRING,
+    entreprise_nom: DataTypes.STRING,
+    entreprise_domaine: DataTypes.STRING,
+    entreprise_email1: DataTypes.STRING,
+    entreprise_email2: DataTypes.STRING,
+    entreprise_telephone1: DataTypes.STRING,
+    entreprise_telephone2: DataTypes.STRING,
+    formulaire_servicesVedettes: DataTypes.STRING,
+    formulaire_servicesTotal: DataTypes.STRING,
+    formulaire_slogan: DataTypes.STRING,
+    formulaire_forces: DataTypes.STRING,
+    formulaire_mission: DataTypes.STRING,
+    formulaire_distinctions: DataTypes.STRING,
+    formulaire_age: DataTypes.INTEGER,
+    formulaire_clientsSatisfaits: DataTypes.INTEGER,
+    formulaire_employes: DataTypes.INTEGER,
+    formulaire_diversQuantite: DataTypes.INTEGER,
+    formulaire_equipement: DataTypes.STRING,
+    formulaire_expertise: DataTypes.STRING,
+    formulaire_mediasSociaux: DataTypes.STRING,
+    formulaire_heuresOuverture: DataTypes.STRING,
+    formulaire_numeroLicence: DataTypes.STRING,
+    formulaire_accreditations: DataTypes.STRING,
+    formulaire_financement: DataTypes.STRING,
+    formulaire_notes: DataTypes.STRING,
+    transfert_actif: DataTypes.BOOLEAN,
+    transfert_nomRegistraire: DataTypes.STRING,
+    transfert_emailRegistraire: DataTypes.STRING,
+    transfert_nomTechnicien: DataTypes.STRING,
+    transfert_emailTechnicien: DataTypes.STRING,
+    transfert_courrielsTransfert: DataTypes.BOOLEAN,
+    transfert_nombreCourriels: DataTypes.INTEGER,
+    vente_nomTelephoniste: DataTypes.STRING,
+    vente_datePremierContact: DataTypes.STRING,
+    vente_nomVendeur: DataTypes.STRING,
+    vente_dateVente: DataTypes.STRING,
+    vente_forfait: DataTypes.STRING,
+    vente_fraisDepart: DataTypes.STRING,
+    vente_nombreModules: DataTypes.INTEGER
+  })
+
+  Client.associate = function (models) {}
+
+  return Client
+}
