@@ -35,7 +35,7 @@ var userDataSchema = new Schema({
     diversQuantite: Number,
     equipement: Array,
     expertise: String,
-    mediasSociaux: Array,
+    mediasSociaux: Object,
     heuresOuverture: Object,
     numeroLicence: String,
     accreditations: Array,

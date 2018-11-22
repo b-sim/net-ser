@@ -14,6 +14,11 @@ var nom = null;
 var detail = null;
 var nomModif = null;
 
+function processTel(numero) {
+    let processed = "(" + numero.slice(0, 3) + ") " + numero.slice(3, 6) + "-" + numero.slice(6, 10);
+    return processed
+}
+
 function replaceInfo(str, info) {
     var infoDefault = {
 
@@ -23,18 +28,29 @@ function replaceInfo(str, info) {
         "email1": /entreprise\.email1/g,
         "email2": /entreprise\.email2/g,
         "adresse": /entreprise\.adresse/g,
+        "age": /formulaire\.age/g,
+        "clientsSatisfaits": /formulaire\.clientsSatisfaits/g,
+        "employes": /formulaire\.employes/g,
+        "diversQuantite": /formulaire\.diversQuantite/g,
+        "diversQuantiteNom": /formulaire\.diversQNom/g,
         "servicesVedettesNom": [ /servicesVedettes0nom/g, /servicesVedettes1nom/g, /servicesVedettes2nom/g, /servicesVedettes3nom/g, /servicesVedettes4nom/g, /servicesVedettes5nom/g ],
         "servicesVedettesDetail": [ /servicesVedettes0detail/g, /servicesVedettes1detail/g, /servicesVedettes2detail/g, /servicesVedettes3detail/g, /servicesVedettes4detail/g, /servicesVedettes5detail/g ],
         "slogan": /formulaire\.slogan/g
     }
-    console.log("replaceInfo function");
+
+    
     var modif1 = str.replace(infoDefault.title, info.entreprise.nom);
-    var modif2 = modif1.replace(infoDefault.tel1, info.entreprise.telephone1);
-    var modif3 = modif2.replace(infoDefault.tel2, info.entreprise.telephone2);
+    var modif2 = modif1.replace(infoDefault.tel1, processTel(info.entreprise.telephone1));
+    var modif3 = modif2.replace(infoDefault.tel2, processTel(info.entreprise.telephone2));
     var modif4 = modif3.replace(infoDefault.email1, info.entreprise.email1);
     var modif5 = modif4.replace(infoDefault.email2, info.entreprise.email2);
     var modif6 = modif5.replace(infoDefault.adresse, info.entreprise.adresse);
-    var modifx = modif6.replace(infoDefault.slogan, info.formulaire.slogan);
+    var modif7 = modif6.replace(infoDefault.age, info.formulaire.age);
+    var modif8 = modif7.replace(infoDefault.clientsSatisfaits, info.formulaire.clientsSatisfaits);
+    var modif9 = modif8.replace(infoDefault.employes, info.formulaire.employes);
+    var modif10 = modif9.replace(infoDefault.diversQuantite, info.formulaire.diversQuantite);
+    var modif11 = modif10.replace(infoDefault.diversQuantiteNom, info.formulaire.diversQuantiteNom);
+    var modifx = modif11.replace(infoDefault.slogan, info.formulaire.slogan);
 
     for (let i = 0; i < info.formulaire.servicesVedettes.length; i++) {
          nomModif = modifx.replace(infoDefault.servicesVedettesNom[i], info.formulaire.servicesVedettes[i].nom);
@@ -46,18 +62,15 @@ function replaceInfo(str, info) {
 }
 
 function sort(array, expression) {
-    console.log("sort function");
 
     for (i = 0; i < array.length; i++) {
         if (expression.test(array[i])) {
             sortedFinal.push(array[i]);
         }
     }
-    console.log("sort over");
 }
 
 function reJoin(array) {
-    console.log("rejoin function");
     for (i = 1; i < array.length; i += 2) {
         let concatString = array[i].concat(array[i + 1]);
         cleanedModulesArray.push(concatString);
@@ -72,12 +85,6 @@ function finished(err) {
 module.exports = {
 
 
-    testFunction() {
-        console.log("test function");
-    },
-    testFunction2() {
-        console.log("test function2");
-    },
 
     // replaceClientInfo(data) {
     //     console.log("replaceClientInfo function");
@@ -99,14 +106,11 @@ module.exports = {
 
 
     createJsonFile(data) {
-        console.log("modulesArray");
-        console.log(data.vente.modulesChoisis);
         var modulesArray = data.vente.modulesChoisis;
         // var modulesArray = ["A1-A", "A2"];
         var joinedArray = modulesArray.join("|");
         var modifiedArray = "module_(?:" + joinedArray + ")";
         var expression = new RegExp(modifiedArray);
-        console.log("createJsonFile function");
         var str = objectData[Object.keys(objectData)[0]];
 
         // const expression = /module_(?:A1-A|A2)/;
