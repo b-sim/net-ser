@@ -142,7 +142,7 @@ module.exports = {
             minute: 'numeric'
         }
 
-        newfileNname = nomEntreprise + " " + date.toLocaleDateString("en-US", options);
+        newfileNname = nomEntreprise + " " + date.toLocaleDateString("en-US", options) + ".json";
 
         fs.writeFile(newfileNname, newFile, finished);
     }
