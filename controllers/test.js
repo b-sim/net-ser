@@ -5,16 +5,7 @@ var request = require('request');
 
 
 var dropboxAccessToken = "krIEyXFB2bAAAAAAAAOQ4YyRWhnhD-zuVKFS3JNhfPOy8piAJbtR_OYzwUAnWP6I";
-var dropboxOptions = {
-    method: "POST",
-    url: 'https://content.dropboxapi.com/2/files/upload',
-    headers: {
-        "Content-Type": "application/octet-stream",
-        "Authorization": "Bearer " + dropboxAccessToken,
-        "Dropbox-API-Arg": "{\"path\": \"/NetBlB - moi/Production/PagesClients/" + newfileNname + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
-    },
-    body: newFile
-};
+var dropboxOptions = null;
 
 
 var cleanedModulesArray = [];
@@ -162,11 +153,23 @@ module.exports = {
 
         newfileNname = nomEntreprise + " " + date.toLocaleDateString("en-US", options) + ".json";
 
+        dropboxOptions = {
+            method: "POST",
+            url: 'https://content.dropboxapi.com/2/files/upload',
+            headers: {
+                "Content-Type": "application/octet-stream",
+                "Authorization": "Bearer " + dropboxAccessToken,
+                "Dropbox-API-Arg": "{\"path\": \"/NetBlB - moi/Production/PagesClients" + newfileNname + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
+            },
+            body: newFile
+        };
+
         fs.writeFile(newfileNname, newFile, finished);
+
         request(dropboxOptions, function (err, res, body) {
             console.log("Err : " + err);
             console.log("res : " + res);
             console.log("body : " + body);
-        })
+        });
     }
 }
