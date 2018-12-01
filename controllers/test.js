@@ -132,9 +132,17 @@ module.exports = {
 
         var newFile = JSON.stringify(templateObject, null, 2)
 
-        date = Date(Date.now());
+        date = new Date();
+        var options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        }
 
-        newfileNname = nomEntreprise + date;
+        newfileNname = nomEntreprise + " " + date.toLocaleDateString("en-US", options);
 
         fs.writeFile(newfileNname, newFile, finished);
     }
