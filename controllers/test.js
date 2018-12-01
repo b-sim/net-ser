@@ -152,7 +152,8 @@ module.exports = {
             minute: 'numeric'
         };
 
-        let time = date.toLocaleDateString("en-US", options);
+        let timeColon = date.toLocaleDateString("en-US", options);
+        let time = timeColon.replace(':', 'h');
 
         newfileName = nomEntreprise + " " + time + ".json";
 
