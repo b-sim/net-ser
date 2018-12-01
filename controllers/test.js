@@ -13,6 +13,9 @@ var modifiedStringABC = "";
 var nom = null;
 var detail = null;
 var nomModif = null;
+var newfileNname = null;
+var nomEntreprise = null;
+var date = null;
 
 function processTel(numero) {
     let processed = "(" + numero.slice(0, 3) + ") " + numero.slice(3, 6) + "-" + numero.slice(6, 10);
@@ -33,12 +36,13 @@ function replaceInfo(str, info) {
         "employes": /formulaire\.employes/g,
         "diversQuantite": /formulaire\.diversQuantite/g,
         "diversQuantiteNom": /formulaire\.diversQNom/g,
-        "servicesVedettesNom": [ /servicesVedettes0nom/g, /servicesVedettes1nom/g, /servicesVedettes2nom/g, /servicesVedettes3nom/g, /servicesVedettes4nom/g, /servicesVedettes5nom/g ],
-        "servicesVedettesDetail": [ /servicesVedettes0detail/g, /servicesVedettes1detail/g, /servicesVedettes2detail/g, /servicesVedettes3detail/g, /servicesVedettes4detail/g, /servicesVedettes5detail/g ],
+        "servicesVedettesNom": [/servicesVedettes0nom/g, /servicesVedettes1nom/g, /servicesVedettes2nom/g, /servicesVedettes3nom/g, /servicesVedettes4nom/g, /servicesVedettes5nom/g],
+        "servicesVedettesDetail": [/servicesVedettes0detail/g, /servicesVedettes1detail/g, /servicesVedettes2detail/g, /servicesVedettes3detail/g, /servicesVedettes4detail/g, /servicesVedettes5detail/g],
         "slogan": /formulaire\.slogan/g
     }
 
-    
+    nomEntreprise = info.entreprise.nom;
+
     var modif1 = str.replace(infoDefault.title, info.entreprise.nom);
     var modif2 = modif1.replace(infoDefault.tel1, processTel(info.entreprise.telephone1));
     var modif3 = modif2.replace(infoDefault.tel2, processTel(info.entreprise.telephone2));
@@ -53,8 +57,8 @@ function replaceInfo(str, info) {
     var modifx = modif11.replace(infoDefault.slogan, info.formulaire.slogan);
 
     for (let i = 0; i < info.formulaire.servicesVedettes.length; i++) {
-         nomModif = modifx.replace(infoDefault.servicesVedettesNom[i], info.formulaire.servicesVedettes[i].nom);
-         modifx = nomModif.replace(infoDefault.servicesVedettesDetail[i], info.formulaire.servicesVedettes[i].detail);
+        nomModif = modifx.replace(infoDefault.servicesVedettesNom[i], info.formulaire.servicesVedettes[i].nom);
+        modifx = nomModif.replace(infoDefault.servicesVedettesDetail[i], info.formulaire.servicesVedettes[i].detail);
     }
 
     modifiedStringABC = modifx;
@@ -128,6 +132,10 @@ module.exports = {
 
         var newFile = JSON.stringify(templateObject, null, 2)
 
-        fs.writeFile('clientPage.json', newFile, finished);
+        date = Date(Date.now());
+
+        newfileNname = nomEntreprise + date;
+
+        fs.writeFile(newfileNname, newFile, finished);
     }
 }
