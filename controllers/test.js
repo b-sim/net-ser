@@ -22,7 +22,7 @@ var modifiedStringABC = "";
 var nom = null;
 var detail = null;
 var nomModif = null;
-var newfileNname = null;
+var newfileName = null;
 var nomEntreprise = null;
 var date = null;
 
@@ -139,7 +139,8 @@ module.exports = {
 
         objectData[Object.keys(objectData)[0]] = finalString;
 
-        var newFile = JSON.stringify(templateObject, null, 2)
+        // var newFile = JSON.stringify(templateObject, null, 2);
+        var dropBoxFile = JSON.stringify(templateObject, null, 2);
 
         date = new Date();
         var options = {
@@ -149,9 +150,12 @@ module.exports = {
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric'
-        }
+        };
 
-        newfileNname = nomEntreprise + " " + date.toLocaleDateString("en-US", options) + ".json";
+        let time = date.toLocaleDateString("en-US", options);
+
+        newfileName = nomEntreprise + " " + time + ".json";
+
 
         dropboxOptions = {
             method: "POST",
@@ -159,17 +163,18 @@ module.exports = {
             headers: {
                 "Content-Type": "application/octet-stream",
                 "Authorization": "Bearer " + dropboxAccessToken,
-                "Dropbox-API-Arg": "{\"path\": \"/NetBlB - moi/Production/PagesClients" + newfileNname + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
+                "Dropbox-API-Arg": "{\"path\": \"/NetBlB - moi/Production/PagesClients/" + newfileName + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
             },
-            body: newFile
+            body: dropBoxFile
         };
 
-        fs.writeFile(newfileNname, newFile, finished);
 
         request(dropboxOptions, function (err, res, body) {
             console.log("Err : " + err);
             console.log("res : " + res);
             console.log("body : " + body);
         });
+
+        // fs.writeFile(newfileName, newFile, finished);
     }
 }
