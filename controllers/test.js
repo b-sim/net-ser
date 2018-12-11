@@ -47,7 +47,10 @@ function replaceInfo(str, info) {
         "diversQuantiteNom": /formulaire\.diversQNom/g,
         "servicesVedettesNom": [/servicesVedettes0nom/g, /servicesVedettes1nom/g, /servicesVedettes2nom/g, /servicesVedettes3nom/g, /servicesVedettes4nom/g, /servicesVedettes5nom/g],
         "servicesVedettesDetail": [/servicesVedettes0detail/g, /servicesVedettes1detail/g, /servicesVedettes2detail/g, /servicesVedettes3detail/g, /servicesVedettes4detail/g, /servicesVedettes5detail/g],
-        "slogan": /formulaire\.slogan/g
+        "slogan": /formulaire\.slogan/g,
+        "heuresOuverture": {
+            "lundi": /formulaire\.heuresOuverture\.lundi/g
+        }
     }
 
     nomEntreprise = info.entreprise.nom;
@@ -63,7 +66,8 @@ function replaceInfo(str, info) {
     var modif9 = modif8.replace(infoDefault.employes, info.formulaire.employes);
     var modif10 = modif9.replace(infoDefault.diversQuantite, info.formulaire.diversQuantite);
     var modif11 = modif10.replace(infoDefault.diversQuantiteNom, info.formulaire.diversQuantiteNom);
-    var modifx = modif11.replace(infoDefault.slogan, info.formulaire.slogan);
+    var modif12 = modif11.replace(infoDefault.heuresOuverture.lundi, info.formulaire.heuresOuverture.lundi);
+    var modifx = modif12.replace(infoDefault.slogan, info.formulaire.slogan);
 
     for (let i = 0; i < info.formulaire.servicesVedettes.length; i++) {
         nomModif = modifx.replace(infoDefault.servicesVedettesNom[i], info.formulaire.servicesVedettes[i].nom);
