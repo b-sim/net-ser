@@ -1,6 +1,9 @@
 {
   "name": "log",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.10.0"
+  },
   "description": "client app",
   "main": "app.js",
   "scripts": {
