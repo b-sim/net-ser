@@ -4,7 +4,7 @@ var request = require('request');
 // dropbox
 
 
-var dropboxAccessToken = "krIEyXFB2bAAAAAAAAOQ4YyRWhnhD-zuVKFS3JNhfPOy8piAJbtR_OYzwUAnWP6I";
+var dropboxAccessToken = "temporarily removed";
 var dropboxOptions = null;
 
 
@@ -173,12 +173,15 @@ module.exports = {
             body: dropBoxFile
         };
 
+// dropbox api push file
 
-        request(dropboxOptions, function (err, res, body) {
-            console.log("Err : " + err);
-            console.log("res : " + res);
-            console.log("body : " + body);
-        });
+        // request(dropboxOptions, function (err, res, body) {
+        //     console.log("Err : " + err);
+        //     console.log("res : " + res);
+        //     console.log("body : " + body);
+        // });
+
+// dropbox api push file end
 
         // fs.writeFile(newfileName, newFile, finished);
     }
