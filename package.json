@@ -7,8 +7,7 @@
   "description": "client app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node app"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "NetBLB",
   "license": "ISC",
